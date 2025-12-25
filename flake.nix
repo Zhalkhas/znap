@@ -15,7 +15,10 @@
       zig-overlay,
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ devshell.flakeModule ];
+      imports = [
+        devshell.flakeModule
+        inputs.flake-parts.flakeModules.easyOverlay
+      ];
 
       systems = [
         "aarch64-darwin"
@@ -48,6 +51,11 @@
               mv ./zig-out/bin/znap $out/bin/znap
             '';
           };
+          
+          overlayAttrs = {
+            inherit (pkgs) znap;
+          };
+
           devshells.default = ({
             env = [
               {
