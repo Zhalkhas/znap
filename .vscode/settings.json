@@ -1,0 +1,4 @@
+{
+    "zig.zls.enabled": "on",
+    "zig.buildOnSaveProvider": "zls"
+}
