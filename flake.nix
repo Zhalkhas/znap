@@ -29,7 +29,7 @@
       ];
 
       perSystem =
-        { pkgs, system, ... }:
+        { pkgs, system, config, ... }:
         {
           packages.default = pkgs.stdenv.mkDerivation {
             pname = "znap";
@@ -51,9 +51,10 @@
               mv ./zig-out/bin/znap $out/bin/znap
             '';
           };
-          
+
+          packages.znap = config.packages.default;
           overlayAttrs = {
-            inherit (pkgs) znap;
+            inherit (config.packages) znap;
           };
 
           devshells.default = ({
