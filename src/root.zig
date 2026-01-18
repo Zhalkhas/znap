@@ -122,32 +122,36 @@ const floating_window_opened_event =
     \\{
     \\  "WindowOpenedOrChanged": {
     \\    "window": {
-    \\      "id": 10,
+    \\      "id": 29,
     \\      "title": "Picture-in-Picture",
     \\      "app_id": "librewolf",
-    \\      "pid": 4738,
-    \\      "workspace_id": 2,
+    \\      "pid": 24962,
+    \\      "workspace_id": 1,
     \\      "is_focused": true,
     \\      "is_floating": true,
     \\      "is_urgent": false,
     \\      "layout": {
     \\        "pos_in_scrolling_layout": null,
     \\        "tile_size": [
-    \\          512,
-    \\          288
+    \\          512.5,
+    \\          287.5
     \\        ],
     \\        "window_size": [
-    \\          512,
+    \\          513,
     \\          288
     \\        ],
     \\        "tile_pos_in_workspace_view": [
-    \\          704,
-    \\          418
+    \\          943.75,
+    \\          556.25
     \\        ],
     \\        "window_offset_in_tile": [
     \\          0,
     \\          0
     \\        ]
+    \\      },
+    \\      "focus_timestamp": {
+    \\        "secs": 39347,
+    \\        "nanos": 691943996
     \\      }
     \\    }
     \\  }
@@ -175,19 +179,7 @@ const Event = struct {
         window: struct {
             id: u32,
             title: []const u8,
-            app_id: []const u8,
-            pid: u32,
-            workspace_id: u32,
-            is_focused: bool,
             is_floating: bool,
-            is_urgent: bool,
-            layout: struct {
-                pos_in_scrolling_layout: ?[]const u8,
-                tile_size: [2]u32,
-                window_size: [2]u32,
-                tile_pos_in_workspace_view: [2]u32,
-                window_offset_in_tile: [2]u32,
-            },
         },
     } = null,
     WindowClosed: ?struct {
@@ -206,21 +198,9 @@ test "parse window opened or changed event" {
     try std.testing.expectEqualDeep(Event{
         .WindowOpenedOrChanged = .{
             .window = .{
-                .id = 10,
+                .id = 29,
                 .title = "Picture-in-Picture",
-                .app_id = "librewolf",
-                .pid = 4738,
-                .workspace_id = 2,
-                .is_focused = true,
                 .is_floating = true,
-                .is_urgent = false,
-                .layout = .{
-                    .pos_in_scrolling_layout = null,
-                    .tile_size = .{ 512, 288 },
-                    .window_size = .{ 512, 288 },
-                    .tile_pos_in_workspace_view = .{ 704, 418 },
-                    .window_offset_in_tile = .{ 0, 0 },
-                },
             },
         },
     }, json.value);
